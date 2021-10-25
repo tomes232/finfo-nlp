@@ -19,7 +19,9 @@ def genAnswer(query, in_file):
    max_tokens=5,
    stop=["\n", "<|endoftext|>"]
   )
-   return response
+  return response
+
+print(genAnswer("Who lead the most recent funding round for Superplastic?", "file-QRZKYePIEhaQGkjS8ajlzPXJ"))
 
 
 

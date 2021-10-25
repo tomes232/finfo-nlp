@@ -13,3 +13,5 @@ def getSearchResults(query, file):
                 )
 
     return response
+
+print(getSearchResults("Who lead the most recent funding round for Superplastic?", "file-QRZKYePIEhaQGkjS8ajlzPXJ"))
