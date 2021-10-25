@@ -8,8 +8,8 @@ document_list = ["Google was founded in 1998 by Larry Page and Sergey Brin while
 
 def genAnswer(query, in_file):
   response = openai.Answer.create(
-   search_model="ada",
-   model="ada",
+   search_model="davinci",
+   model="curie",
    question=query,
    file= in_file,
    examples_context="OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
