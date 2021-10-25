@@ -15,8 +15,8 @@ def genAnswer(query, in_file):
    file= in_file,
    examples_context="In 2017, U.S. life expectancy was 78.6 years.",
    examples=[["What is human life expectancy in the United States?","78 years."]],
-   max_rerank=10,
-   max_tokens=10,
+   max_rerank=5,
+   max_tokens=5,
    stop=["\n", "<|endoftext|>"]
   )
    return response
