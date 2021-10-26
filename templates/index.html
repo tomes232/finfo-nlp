@@ -17,7 +17,7 @@
     <form>
         <div id="chatbox">
             <div class="col-md-8 ml-auto mr-auto">
-                <p class="botText"><span>Hi! I'm Your bot.</span></p>
+                <p class="botText"><span>finBot: Hi! I'm Your bot.</span></p>
             </div>
         </div>
         <div id="userInput" class="row">
@@ -34,7 +34,7 @@
     $(document).ready(function() {
         $("form").on("submit", function(event) {
             var rawText = $("#text").val();
-            var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+            var userHtml = '<p class="userText"><span>You: ' + rawText + "</span></p>";
             $("#text").val("");
             $("#chatbox").append(userHtml);
             document.getElementById("userInput").scrollIntoView({
@@ -48,7 +48,7 @@
                 type: "POST",
                 url: "/bot",
             }).done(function(data) {
-                var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+                var botHtml = '<p class="botText"><span>finBot: ' + data + "</span></p>";
                 $("#chatbox").append($.parseHTML(botHtml));
                 document.getElementById("userInput").scrollIntoView({
                     block: "start",
