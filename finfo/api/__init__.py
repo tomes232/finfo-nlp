@@ -1,3 +1,3 @@
 """finfo REST API."""
 
-from finfo.api.app import bot
+from finfo.api.posts import home
