@@ -46,7 +46,7 @@
                     msg: rawText,
                 },
                 type: "POST",
-                url: "/bot",
+                url: "/api/v1/bot",
             }).done(function(data) {
                 var botHtml = '<p class="botText"><span>finBot: ' + data + "</span></p>";
                 $("#chatbox").append($.parseHTML(botHtml));

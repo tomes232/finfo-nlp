@@ -1,10 +1,10 @@
 import os
 from flask import Flask, request
-from q_and_a import genAnswer
+from finfo.api.q_and_a import genAnswer
 import random
 import json
 from flask import Flask, render_template, request
-from flask_ngrok import run_with_ngrok
+# from flask_ngrok import run_with_ngrok
 import openai
 
 app = Flask(__name__, static_url_path='/static')
@@ -15,7 +15,7 @@ def home():
     print("I")
     return render_template("index.html")
 
-@app.route('/bot', methods=['POST'])
+@app.route('/api/v1/bot', methods=['POST'])
 def bot():
     incoming_msg = request.form["msg"]
     try:
