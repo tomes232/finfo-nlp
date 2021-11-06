@@ -15,6 +15,7 @@ def home():
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
+    print("kosineh")
     incoming_msg = request.form["msg"]
     try:
         answer = genAnswer(incoming_msg, "file-QRZKYePIEhaQGkjS8ajlzPXJ")["answers"][0]
