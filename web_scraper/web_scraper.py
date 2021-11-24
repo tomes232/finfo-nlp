@@ -13,7 +13,7 @@ from date_ import date_func
 import json
 
 
-def main():
+def scraper():
     print('hello')
     options = selenium.webdriver.chrome.options.Options()
     options.add_argument("--headless")
@@ -69,5 +69,5 @@ def main():
     #print(final_string)
     # with open("ma.txt", "w") as ma_file:
     #     ma_file.write(final_string_ma)
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
