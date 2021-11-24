@@ -5,11 +5,11 @@ import selenium
 import selenium.webdriver
 import datetime
 from datetime import date
-from vc import vc_parser
-from business_wire import business_wire
-from prn import prn
-from techcrunch import techcrunch
-from date_ import date_func
+from finfo.api.vc import vc_parser
+from finfo.api.business_wire import business_wire
+from finfo.api.prn import prn
+from finfo.api.techcrunch import techcrunch
+from finfo.api.date_ import date_func
 import json
 
 
