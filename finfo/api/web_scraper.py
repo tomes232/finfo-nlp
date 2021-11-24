@@ -11,6 +11,11 @@ from finfo.api.prn import prn
 from finfo.api.techcrunch import techcrunch
 from finfo.api.date_ import date_func
 import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+PATH_TO_CHROMEDIRVER= os.getenv('PATH_TO_CHROMEDIRVER')
 
 
 def scraper():
@@ -29,7 +34,7 @@ def scraper():
     )
     node_modules_bin_path = node_modules_bin.stdout.strip()
     print("node path", node_modules_bin_path)
-    chromedriver_path = "bin/chromedriver"#Path(node_modules_bin_path) / "chromedriver"
+    chromedriver_path = PATH_TO_CHROMEDIRVER#Path(node_modules_bin_path) / "chromedriver"
 
     driver = selenium.webdriver.Chrome(
         options=options,
