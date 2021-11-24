@@ -9,9 +9,9 @@ from flask import Flask, render_template, request
 from finfo.api.web_scraper import scraper
 import openai
 
-@finfo.app.route("/api/v1/kosi/", methods=["GET"])
+@finfo.app.route("/", methods=["GET"])
 def home():
-    print("kosineh")
+    print("blah")
     scraper()
     return render_template("index.html")
 
