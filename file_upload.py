@@ -4,7 +4,7 @@ import requests
 def upload():
 
     headers = {
-        'Authorization': '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',
+        'Authorization': 'key',
     }
 
     files = {
