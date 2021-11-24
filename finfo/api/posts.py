@@ -6,11 +6,13 @@ import random
 import json
 from flask import Flask, render_template, request
 # from flask_ngrok import run_with_ngrok
+from web_scraper import scraper
 import openai
 
 @finfo.app.route("/api/v1/kosi/", methods=["GET"])
 def home():
     print("kosineh")
+    scraper()
     return render_template("index.html")
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
