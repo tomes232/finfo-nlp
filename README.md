@@ -11,6 +11,10 @@ python3 -m venv env
 
 source env/bin/activate
 
+pip install openai 
+
+pip install dotenv 
+
 $ pip install -r requirements.txt
 
 $ pip install -e .
