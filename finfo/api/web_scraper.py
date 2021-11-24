@@ -28,7 +28,8 @@ def scraper():
         check=True
     )
     node_modules_bin_path = node_modules_bin.stdout.strip()
-    chromedriver_path = Path(node_modules_bin_path) / "chromedriver"
+    print("node path", node_modules_bin_path)
+    chromedriver_path = "bin/chromedriver"#Path(node_modules_bin_path) / "chromedriver"
 
     driver = selenium.webdriver.Chrome(
         options=options,
