@@ -6,6 +6,7 @@ import json
 from flask import Flask, render_template, request
 from flask_ngrok import run_with_ngrok
 import openai
+##from web_scraper.web_scraper import scraper this is whats casuing the error
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'top-secret!'
@@ -13,6 +14,7 @@ app.config['SECRET_KEY'] = 'top-secret!'
 @app.route("/")
 def home():
     print("I")
+    ##scraper() needs to be fixed
     return render_template("index.html")
 
 @app.route('/bot', methods=['POST'])
