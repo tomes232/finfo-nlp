@@ -7,7 +7,9 @@ import json
 from flask import Flask, render_template, request
 # from flask_ngrok import run_with_ngrok
 from finfo.api.web_scraper import scraper
+from finfo.api.classification import classification
 import openai
+
 
 @finfo.app.route("/", methods=["GET"])
 def home():
@@ -18,6 +20,8 @@ def home():
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
     incoming_msg = request.form["msg"]
+    classifier = classification(incoming_msg)
+    print(classifier)
     try:
         answer = genAnswer(incoming_msg, "file-QRZKYePIEhaQGkjS8ajlzPXJ")["answers"][0]
     except openai.error.InvalidRequestError:
