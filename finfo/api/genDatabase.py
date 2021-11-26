@@ -30,7 +30,7 @@ def genDatabase(text):
     return response
 
 def genDatabase_config(text, classification):
-    with open('config.json', 'r') as f:
+    with open('finfo/api/config.json', 'r') as f:
         config = json.load(f)
     model_config = config[classification]["database"]
     response = openai.Completion.create(

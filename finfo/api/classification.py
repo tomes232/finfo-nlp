@@ -2,7 +2,7 @@ import openai
 import os
 import json
 
-with open('config.json', 'r') as f:
+with open('finfo/api/config.json', 'r') as f:
     config = json.load(f)
 classification_config = config["classification"]
 

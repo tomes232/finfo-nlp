@@ -24,7 +24,7 @@ def genAnswer(query, in_file):
   return response
 
 def genAnswer_config(query, in_file, classification):
-  with open('config.json', 'r') as f:
+  with open('finfo/api/config.json', 'r') as f:
     config = json.load(f)
   model_config = config[classification]["answering"]
 
