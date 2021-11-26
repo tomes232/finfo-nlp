@@ -4,7 +4,8 @@
             "examples": [
               ["Partners Group to Buy HVAC Firm DiversiTech in $2.2 Billion Deal", "m&a"],
               ["Autonomous delivery startup Nuro raises $600 million; valuation set at $8.6 billion", "funding"],
-              ["Minnesota wine company, with Julianne Hough as partner, files for an IPO", "ipo"]
+              ["Minnesota wine company, with Julianne Hough as partner, files for an IPO", "ipo"],
+              ["Financial technology SoFi announced they will be going public through a SPAC merger with Social Capital Holdings Corp IV, which will trade under the ticker IPOE.", "spac"]
             ],
             "labels": ["m&a", "funding", "ipo", "spac"],
             "model": "curie",
@@ -14,7 +15,7 @@
         "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
         "answering":{
             "examples_context": "OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
-            "examples": [["Who led the funding rounnd for OnChain"," Andreessen Horowitz of a16z led the funding"]],
+            "examples": [["Who led the funding rounnd for OnChain?","Andreessen Horowitz of a16z led the funding round."], ["How much was the funding round?", "The funding round was $7.5 million."], ["What is OnChain raising money for?"], ["OnChain is raising money for Cryptoys, a new non-fungible token platform that combines digital toys and gaming."]],
             "search_model":"davinci",
             "model":"curie",
             "max_rerank":5,
@@ -35,19 +36,56 @@
             "stop":["\n\n"]   
             }
         },
-    "acquisition":{
+    "m&a":{
         "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
-        "qa_context": "Buyout firm Partners Group Holding AG has agreed to acquire DiversiTech Corp. from private equity firm Permira in a deal that values the air conditioning and electrical parts manufacturer at $2.2 billion",
-        "examples":["Who led the funding rounnd for OnChain"," Andreessen Horowitz of a16z led the funding"],
-        "params":{
-            "search_model":"davinci",
-            "model":"curie",
-            "max_rerank":5,
-            "max_tokens":50,
-            "temperature":"None",
-            "logprobs":"None",
-            "stop":["\n", "<|endoftext|>"]
-        }
+        "answering":{
+            "qa_context": "Buyout firm Partners Group Holding AG has agreed to acquire DiversiTech Corp. from private equity firm Permira in a deal that values the air conditioning and electrical parts manufacturer at $2.2 billion. Popular TV network NBC announced today a merger with Turner Networks in a deal that values the new conglomerate at $200 billion.",
+            "examples":[["Who acquired DiversiTech Corp?","Partners Group Holding AG agreed to acquire DiversiTech Corp."], ["How much was the deal?", "The deal values DiversiTech Corp. at $2.2 billion."], ["What is DiversiTech Corp.?", "DiversiTech Corp is an air conditioning and electrical parts manufacturer."], ["Was the company acquired from another firm?", "Yes, DiversiTech Corp. was acquired from private equity firm Permira."], ["Which companies merged?", "Companies that merged include NBC and Turner Networks."], ["How much was the merger worth?", "The merger has an estimated valuation of $200 billion."]],
+            "params":{
+                "search_model":"davinci",
+                "model":"curie",
+                "max_rerank":5,
+                "max_tokens":50,
+                "temperature":"None",
+                "logprobs":"None",
+                "stop":["\n", "<|endoftext|>"]
+            }
+        },
+        "database":{}
+    },
+    "ipo":{
+        "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
+        "answering":{
+            "qa_context": "Payment processing company Stripe has filed for an IPO. The IPO is targeted for late 2021. Stripe's valuation is $95 billion.",
+            "examples":[["Which companies announced IPO's?","Stripe announced an IPO."], ["What is the date of Stripe's IPO?", "Stripe is targeting to release their IPO in late 2021."], ["What is Stripe's valuation?", "Stripe's valuation is $95 billion."], ["What is Stripe?", "Stripe is a San Francisco based payment processing company."]],
+            "params":{
+                "search_model":"davinci",
+                "model":"curie",
+                "max_rerank":5,
+                "max_tokens":50,
+                "temperature":"None",
+                "logprobs":"None",
+                "stop":["\n", "<|endoftext|>"]
+            }
+        },
+        "database":{}
+    },
+    "spac":{
+        "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
+        "answering":{
+            "qa_context": "Financial technology SoFi announced they will be going public through a SPAC merger with Social Capital Holdings Corp IV, which will trade under the ticker IPOE.",
+            "examples":[["Which companies announced a SPAC merger?","SoFi announced a SPAC merger."], ["Who is SoFi completing the merger with?", "SoFi is completing the merger with Social Capital."], ["What is the ticker for the SoFi SPAC?", "The ticker for the SoFi SPAC is IPOE."]],
+            "params":{
+                "search_model":"davinci",
+                "model":"curie",
+                "max_rerank":5,
+                "max_tokens":50,
+                "temperature":"None",
+                "logprobs":"None",
+                "stop":["\n", "<|endoftext|>"]
+            }
+        },
+        "database":{}
     }
 
 }
