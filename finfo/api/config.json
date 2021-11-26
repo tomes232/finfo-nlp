@@ -1,0 +1,53 @@
+{
+    "classification":
+        {
+            "examples": [
+              ["Partners Group to Buy HVAC Firm DiversiTech in $2.2 Billion Deal", "m&a"],
+              ["Autonomous delivery startup Nuro raises $600 million; valuation set at $8.6 billion", "funding"],
+              ["Minnesota wine company, with Julianne Hough as partner, files for an IPO", "ipo"]
+            ],
+            "labels": ["m&a", "funding", "ipo", "spac"],
+            "model": "curie",
+            "search_model": "ada"
+        },
+    "funding":{
+        "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
+        "answering":{
+            "examples_context": "OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
+            "examples": [["Who led the funding rounnd for OnChain"," Andreessen Horowitz of a16z led the funding"]],
+            "search_model":"davinci",
+            "model":"curie",
+            "max_rerank":5,
+            "max_tokens":50,
+            "temperature":"None",
+            "logprobs":"None",
+            "stop":["\n", "<|endoftext|>"]
+            
+        },
+        "database":{
+            "prompt": "Doyobi, a Singapore-based edtech startup focused on teachers, gets $2.8M seed. The edtech boom has focused primarily on students, but teachers are learners, too. Doyobi, a Singapore-based professional development platform, wants to give educators new, more engaging ways of teaching STEM subjects. The startup announced today it has raised $2.8 million in pre-Series A funding led by Monk’s Hill Ventures. The round included Tresmonos Capital, Novus Paradigm Capital and XA Network, along with angel investors like Carousell chief executive officer Quek Siu Rui, Glints co-founders Oswald Yeo and Seah Ying Cong and Grab Financial Group head Reuben Lai. Countable brings in $12M for virtual brand communitiesEnterprise engagement company Countable raised $12 million in Series A funding so that brands can more easily engage with customers, even in a way that shows a brand’s values and stance on issues.Existing investor Canaan Partners led the round and was joined by Ulysses Management and Global Catalyst Partners. {} \n\nPlease make a table summarizing the funding rounds of startups\n| Company | Round | Funding | Investors|\n| Doyobi | seed | $2.8M | Tresmonos Capital, Novus Paradigm Capital, XA Network |\n| Countable | Series A | $12M | Canaan Partners, Ulysses Management, Global Catalyst Partners|\n",
+            "engine":"davinci",
+            "temperature":0,
+            "max_tokens":100,
+            "top_p":1.0,
+            "frequency_penalty":0.0,
+            "presence_penalty":0.0,
+            "stop":["\n\n"]   
+            }
+        },
+    "acquisition":{
+        "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
+        "qa_context": "Buyout firm Partners Group Holding AG has agreed to acquire DiversiTech Corp. from private equity firm Permira in a deal that values the air conditioning and electrical parts manufacturer at $2.2 billion",
+        "examples":["Who led the funding rounnd for OnChain"," Andreessen Horowitz of a16z led the funding"],
+        "params":{
+            "search_model":"davinci",
+            "model":"curie",
+            "max_rerank":5,
+            "max_tokens":50,
+            "temperature":"None",
+            "logprobs":"None",
+            "stop":["\n", "<|endoftext|>"]
+        }
+    }
+
+}
