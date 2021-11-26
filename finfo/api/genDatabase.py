@@ -1,5 +1,6 @@
 import os
 import openai
+import json
 openai.organization = "org-9eeR7LXRyCEwLMGEtfhmQLms"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -27,6 +28,29 @@ def genDatabase(text):
     stop=["\n\n"]
     )
     return response
+
+def genDatabase_config(text, classification):
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+    model_config = config[classification]["database"]
+    response = openai.Completion.create(
+    engine=model_config["engine"],
+    prompt=model_config["prompt"].format(text),
+    temperature=model_config["temperature"],
+    max_tokens=model_config["max_tokens"],
+    top_p=model_config["top_p"],
+    frequency_penalty=model_config["frequency_penalty"],
+    presence_penalty=model_config["presence_penalty"],
+    stop=model_config["stop"]
+    )
+
+    data = response["choices"][0]["text"].split("\n")[0].split("|")
+    company = data[1]
+    round = data[2]
+    funding = data[3]
+    investors = data[4]
+    db_entry = {"round": round, "funding": funding, "investors": investors}
+    return company, db_entry
 
 company = {}
 for document in document_list:
