@@ -12,6 +12,13 @@
   <form action="/api/v1/scrape/" method="post">
       <button name="scrape" type="submit">Update Finfo Database</button>
   </form>
+  <ul>
+    {% for item in data %}
+    <li>Time Last Scraped: {{item.read}}</li>
+    <li>Current Time: {{item.curr}}</li>
+    {% endfor %}
+  </ul>
+
 </header>
 
 <body>

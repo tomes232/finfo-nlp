@@ -11,18 +11,34 @@ from finfo.api.web_scraper import scraper
 import openai
 from datetime import datetime
 
-# TIMESCRAPE = datetime.time(0,0,0,0)
-
 @finfo.app.route("/", methods=["GET"])
 def home():
     print("blah")
-    # scraper()
-    return render_template("index.html")
+    with open("time.txt", "r") as f:
+        readtime = f.readline().rstrip()
+        currtime = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+    data = [
+        {
+            "read": readtime,
+            "curr": currtime
+        }
+    ]
+    return render_template("index.html", data=data)
 
 @finfo.app.route("/api/v1/scrape/", methods=["POST"])
 def scrape():
+    
+    with open("time.txt", "w") as f:
+        time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        f.write(time)
+    data = [
+        {
+            "read": time,
+            "curr": time
+        }
+    ]
     scraper()
-    return redirect(url_for('home'))
+    return redirect(url_for('home', data=data))
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
