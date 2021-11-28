@@ -9,6 +9,9 @@ from flask import Flask, render_template, request, url_for
 # from flask_ngrok import run_with_ngrok
 from finfo.api.web_scraper import scraper
 import openai
+from datetime import datetime
+
+# TIMESCRAPE = datetime.time(0,0,0,0)
 
 @finfo.app.route("/", methods=["GET"])
 def home():
@@ -19,7 +22,7 @@ def home():
 @finfo.app.route("/api/v1/scrape/", methods=["POST"])
 def scrape():
     scraper()
-    return redirect(url_for('home')) 
+    return redirect(url_for('home'))
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
