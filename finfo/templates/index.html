@@ -35,6 +35,19 @@
         $("form").on("submit", function(event) {
             var rawText = $("#text").val();
             var userHtml = '<p class="userText"><span>You: ' + rawText + "</span></p>";
+            if ('speechSynthesis' in window) {
+                var msg = new SpeechSynthesisUtterance();
+                var voices = window.speechSynthesis.getVoices();
+                msg.voice = voices[0]; 
+                msg.text = $("#text").val();
+                msg.rate = 0.9;
+                msg.volume = 1.0;
+                msg.lang = 'en-US';
+                window.speechSynthesis.speak(msg);
+            } else{
+                // Speech Synthesis Not Supported
+                alert("Sorry, your browser doesn't support text to speech!");
+            }
             $("#text").val("");
             $("#chatbox").append(userHtml);
             document.getElementById("userInput").scrollIntoView({
