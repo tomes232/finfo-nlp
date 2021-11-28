@@ -9,6 +9,10 @@
 
 <header>
   <img src="static/finfo_logo.png"></img>
+  <form action="/api/v1/scrape/" method="post">
+      <button name="scrape" type="submit">Update Finfo Database</butto>
+
+  </form>
 </header>
 
 <body>
@@ -30,7 +34,7 @@
 </div>
 </div>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $("form").on("submit", function(event) {
             var rawText = $("#text").val();
@@ -58,7 +62,7 @@
             event.preventDefault();
         });
     });
-</script>
+</script> -->
 </body>
 
 </html>

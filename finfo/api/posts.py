@@ -1,10 +1,11 @@
 import os
 from flask import Flask, request
+from werkzeug.utils import redirect
 import finfo
 from finfo.api.q_and_a import genAnswer
 import random
 import json
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 # from flask_ngrok import run_with_ngrok
 from finfo.api.web_scraper import scraper
 import openai
@@ -12,8 +13,13 @@ import openai
 @finfo.app.route("/", methods=["GET"])
 def home():
     print("blah")
-    scraper()
+    # scraper()
     return render_template("index.html")
+
+@finfo.app.route("/api/v1/scrape/", methods=["POST"])
+def scrape():
+    scraper()
+    return redirect(url_for('home')) 
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
