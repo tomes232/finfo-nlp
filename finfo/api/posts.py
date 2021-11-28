@@ -14,7 +14,14 @@ from datetime import datetime
 @finfo.app.route("/", methods=["GET"])
 def home():
     print("blah")
-    with open("time.txt", "r") as f:
+    with open("time.txt", "r") as f: 
+        """
+        need to use txt file for the last scraped because 
+        what happens is when we kill the project in our 
+        terminals all the time initializations reset on launch
+        so by writing the last-scraped time to the txt which doesnt
+        change on relaunch we can keep it as a "constant variable"
+        """
         readtime = f.readline().rstrip()
         currtime = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     data = [
@@ -33,7 +40,7 @@ def scrape():
         f.write(time)
     data = [
         {
-            "read": time,
+            "read": time, 
             "curr": time
         }
     ]
