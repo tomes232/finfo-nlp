@@ -7,7 +7,13 @@ have ur  dot env set up with OPEN_API_KEY = INSERT_YOUR_KEY
 
 install selenium : [here's a guide](https://towardsdatascience.com/how-to-use-selenium-to-web-scrape-with-example-80f9b23a843a)
 
+python3 -m venv env
+
 source env/bin/activate
+
+pip install openai 
+
+pip install dotenv 
 
 $ pip install -r requirements.txt
 
