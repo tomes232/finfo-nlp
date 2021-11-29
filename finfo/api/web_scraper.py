@@ -19,7 +19,7 @@ from finfo.api.genDatabase import genDatabase
 from finfo.mongodb import upload_dict
 
 load_dotenv()
-PATH_TO_CHROMEDIRVER= os.getenv('PATH_TO_CHROMEDIRVER')
+PATH_TO_CHROMEDIRVER= "bin/chromedriver"
 
 with open('finfo/api/config.json', 'r') as f:
     config = json.load(f)
@@ -28,6 +28,7 @@ with open('finfo/api/config.json', 'r') as f:
 def scraper():
     """this is the scraper"""
     print('hello')
+    print(PATH_TO_CHROMEDIRVER)
     options = selenium.webdriver.chrome.options.Options()
     options.add_argument("--headless")
 
@@ -94,7 +95,7 @@ def scraper():
 
 
         upload_dict(data_upload, "articles", article_classification)
-        with open('search.jsonl', 'a') as jsonl_file:
+        with open('sandbox.jsonl', 'w') as jsonl_file:
             #print(data_dic)
             json.dump(data_dic, jsonl_file)
             jsonl_file.write('\n')

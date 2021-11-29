@@ -116,7 +116,7 @@ def search(db_name, collection_name, query):
         {'$match': {'$text': {'$search': query}}},
         {'$project': {'text': 15}}])
 
-    with open('sandbox.jsonl', 'a') as jsonl_file:
+    with open('search.jsonl', 'w') as jsonl_file:
         for item in cursor:
             #print(data_dic)
             json.dump({"text": item["text"]}, jsonl_file)
