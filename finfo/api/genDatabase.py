@@ -27,8 +27,14 @@ def genDatabase(text):
     presence_penalty=0.0,
     stop=["\n\n"]
     )
-    return response
-
+    
+    data = response["choices"][0]["text"].split("\n")[0].split("|")
+    company = data[1]
+    round = data[2]
+    funding = data[3]
+    investors = data[4]
+    db_entry = {"round": round, "funding": funding, "investors": investors}
+    return company, db_entry
 def genDatabase_config(text, classification):
     with open('finfo/api/config.json', 'r') as f:
         config = json.load(f)
@@ -52,9 +58,9 @@ def genDatabase_config(text, classification):
     db_entry = {"round": round, "funding": funding, "investors": investors}
     return company, db_entry
 
-company = {}
-for document in document_list:
-    response  = genDatabase(document)
-    data = response["choices"][0]["text"].split("\n")[0].split("|")
-    print("Company:{} \n\tRound:{}  \n\tFunding:{} \n\tInvestors:{}".format(data[1], data[2], data[3], data[4]))
+# company = {}
+# for document in document_list:
+#     response  = genDatabase(document)
+#     data = response["choices"][0]["text"].split("\n")[0].split("|")
+#     print("Company:{} \n\tRound:{}  \n\tFunding:{} \n\tInvestors:{}".format(data[1], data[2], data[3], data[4]))
 

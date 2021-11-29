@@ -11,5 +11,8 @@ set -x
 export FLASK_ENV=development
 export FLASK_APP=finfo
 export CHROMEDRIVER=/bin/chromedriver
+export OPENAI_API_KEY="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"
+export PATH_TO_CHROMEDIRVER=bin/chromedriver
+
 
 flask run --host 0.0.0.0 --port 8000

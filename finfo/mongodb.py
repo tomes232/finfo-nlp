@@ -7,10 +7,14 @@ import json
 from pprint import pprint
 
 # connect to MongoDB, set a 5-second connection timeout
-conn_str = "mongodb+srv://tpickup232:33pJ6uixW4zUwJk@cluster0.8bxso.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
+articles_db = "mongodb+srv://tpickup232:33pJ6uixW4zUwJk@cluster0.8bxso.mongodb.net/articles?retryWrites=true&w=majority"
+companies_db = "mongodb+srv://tpickup232:33pJ6uixW4zUwJk@cluster0.8bxso.mongodb.net/companies?retryWrites=true&w=majority"
 
 def get_db(db_name):
+    if db_name == "companies":
+        conn_str = companies_db
+    else:
+        conn_str = articles_db
     # set a 5-second connection timeout
     client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
     
@@ -23,8 +27,12 @@ def get_db(db_name):
     return db
 
 def get_collection(db, collection_name):
+    if db == "companies":
+        conn_str = companies_db
+    else:
+        conn_str = articles_db
     # set a 5-second connection timeout
-    client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+    client = MongoClient(conn_str, serverSelectionTimeoutMS=10000)
     
     try:
         client.server_info()
@@ -35,7 +43,13 @@ def get_collection(db, collection_name):
     return collection
 
 def upload_dict(dict_data, db_name, collection_name):
+    if db_name == "companies":
+        conn_str = companies_db
+    else:
+        conn_str = articles_db
+
     # set a 5-second connection timeout
+
     client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
 
     try:
@@ -45,9 +59,19 @@ def upload_dict(dict_data, db_name, collection_name):
     
     db = client[db_name]
     collection = db[collection_name]
+
+    if db_name == "articles":
+        #pymongo find dict_data["text"]
+        text_find = collection.find({"text": dict_data["text"]})
+        return False
     collection.insert_one(dict_data)
+    return True
 
 def upload_files(file_path, db_name, collection_name):
+    if db_name == "companies":
+        conn_str = companies_db
+    else:
+        conn_str = articles_db
     
     # set a 5-second connection timeout
     client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
