@@ -32,7 +32,7 @@ def get_collection(db, collection_name):
     else:
         conn_str = articles_db
     # set a 5-second connection timeout
-    client = MongoClient(conn_str, serverSelectionTimeoutMS=10000)
+    client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
     
     try:
         client.server_info()
@@ -62,8 +62,9 @@ def upload_dict(dict_data, db_name, collection_name):
 
     if db_name == "articles":
         #pymongo find dict_data["text"]
-        text_find = collection.find({"text": dict_data["text"]})
-        return False
+        if collection.find({"text": dict_data["text"]}).count() != 0:
+            print(collection.find({"text": dict_data["text"]}))
+            return False
     collection.insert_one(dict_data)
     return True
 
@@ -91,6 +92,35 @@ def upload_files(file_path, db_name, collection_name):
         documents = [json.loads(line) for line in file]
         collection.insert_many(documents)
 
+def search(db_name, collection_name, query):
+    if db_name == "companies":
+        conn_str = companies_db
+    else:
+        conn_str = articles_db
+    
+    # set a 5-second connection timeout
+    client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+
+    try:
+        client.server_info()
+    except Exception:
+        print("Unable to connect to the server.")
+    
+    # get a handle to the database
+    db = client[db_name]
+    # get a handle to the collection
+    collection = db[collection_name]
+    # search for the term
+
+    cursor = collection.aggregate([
+        {'$match': {'$text': {'$search': query}}},
+        {'$project': {'text': 15}}])
+
+    with open('sandbox.jsonl', 'a') as jsonl_file:
+        for item in cursor:
+            #print(data_dic)
+            json.dump({"text": item["text"]}, jsonl_file)
+            jsonl_file.write('\n')
 
 
 # Issue the serverStatus command and print the results
