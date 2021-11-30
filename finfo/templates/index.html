@@ -98,6 +98,19 @@
               p.appendChild(text);
               result.appendChild(p);
             }
+            if ('speechSynthesis' in window) {
+                var msg = new SpeechSynthesisUtterance();
+                var voices = window.speechSynthesis.getVoices();
+                msg.voice = voices[0]; 
+                msg.text = words;
+                msg.rate = 0.9;
+                msg.volume = 1.0;
+                msg.lang = 'en-US';
+                window.speechSynthesis.speak(msg);
+            } else{
+                // Speech Synthesis Not Supported
+                alert("Sorry, your browser doesn't support text to speech!");
+            }
             console.log(words);
           };
           recognition.continuous = true;
