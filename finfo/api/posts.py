@@ -60,6 +60,9 @@ def scrape():
     print(response)
     #edit the config
     config['file'] = response["id"]
+    #write it back to the file
+    with open('config.json', 'w') as f:
+        json.dump(config, f)
 
     return redirect(url_for('home', data=data))
 
@@ -72,6 +75,9 @@ def bot():
         response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
         #edit the config
         config['file'] = response["id"]
+        #write it back to the file
+        with open('config.json', 'w') as f:
+            json.dump(config, f)
     try:
         answer = genAnswer(incoming_msg, config["file"])["answers"][0]
     except openai.error.InvalidRequestError:
