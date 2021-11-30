@@ -93,10 +93,7 @@ def upload_files(file_path, db_name, collection_name):
         collection.insert_many(documents)
 
 def search(db_name, collection_name, query):
-    if db_name == "companies":
-        conn_str = companies_db
-    else:
-        conn_str = articles_db
+    conn_str = articles_db
     
     # set a 5-second connection timeout
     client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
@@ -129,11 +126,12 @@ def search(db_name, collection_name, query):
 
 #main function
 if __name__ == "__main__":
-    upload_dict({'name': 'John', 'age': 27}, 'myFirstDatabase', 'myFirstCollection')
-    upload_files('sandbox.jsonl', 'myFirstDatabase', 'myFirstCollection')
-    db = get_db('myFirstDatabase')
-    collection = get_collection(db, 'myFirstCollection')
-    print(collection.find_one())
-    print(collection.find_one({'name': 'John'}))
-    print(collection.find_one({'name': 'John'}, {'_id': False}))
-    print(collection.find_one({'name': 'John'}, {'_id': False, 'name': True}))
+    # upload_dict({'name': 'John', 'age': 27}, 'myFirstDatabase', 'myFirstCollection')
+    # upload_files('sandbox.jsonl', 'myFirstDatabase', 'myFirstCollection')
+    # db = get_db('myFirstDatabase')
+    # collection = get_collection(db, 'myFirstCollection')
+    # print(collection.find_one())
+    # print(collection.find_one({'name': 'John'}))
+    # print(collection.find_one({'name': 'John'}, {'_id': False}))
+    # print(collection.find_one({'name': 'John'}, {'_id': False, 'name': True}))
+    search('articles', 'funding', 'who lead the series a funding for Circle')
