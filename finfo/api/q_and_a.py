@@ -29,15 +29,15 @@ def genAnswer_config(query, in_file, classification):
   model_config = config[classification]["answering"]
 
   response = openai.Answer.create(
-  search_model=model_config["search_model"],
-  model=model_config["model"],
+  search_model=model_config['params']["search_model"],
+  model=model_config['params']["model"],
   question=query,
   file= in_file,
-  examples_context=model_config["examples_context"],
+  examples_context=model_config["qa_context"],
   examples=model_config["examples"],
-  max_rerank=model_config["max_rerank"],
-  max_tokens=model_config["max_tokens"],
-  stop=model_config["stop"]
+  max_rerank=model_config['params']["max_rerank"],
+  max_tokens=model_config['params']["max_tokens"],
+  stop=model_config['params']["stop"]
   )
   return response
 

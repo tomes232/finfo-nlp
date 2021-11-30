@@ -2,26 +2,29 @@
     "classification":
         {
             "examples": [
+                ["Buyout firm Partners Group Holding AG has agreed to acquire DiversiTech Corp. from private equity firm Permira in a deal that values the air conditioning and electrical parts manufacturer at $2.2 billion.", "m&a"],
               ["Autonomous delivery startup Nuro raises $600 million; valuation set at $8.6 billion", "funding"],
               ["Minnesota wine company, with Julianne Hough as partner, files for an IPO", "ipo"],
               ["Financial technology SoFi announced they will be going public through a SPAC merger with Social Capital Holdings Corp IV, which will trade under the ticker IPOE.", "spac"]
             ],
-            "labels": ["funding", "ipo", "spac"],
+            "labels": ["funding", "ipo", "spac", "m&a"],
             "model": "curie",
             "search_model": "ada"
         },
     "funding":{
         "file":"file-QRZKYePIEhaQGkjS8ajlzPXJ",
         "answering":{
-            "examples_context": "OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
+            "qa_context": "OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
             "examples": [["Who led the funding rounnd for OnChain?","Andreessen Horowitz of a16z led the funding round."], ["How much was the funding round?", "The funding round was $7.5 million."], ["What is OnChain raising money for?"], ["OnChain is raising money for Cryptoys, a new non-fungible token platform that combines digital toys and gaming."]],
-            "search_model":"davinci",
-            "model":"curie",
-            "max_rerank":5,
-            "max_tokens":50,
-            "temperature":"None",
-            "logprobs":"None",
-            "stop":["\n", "<|endoftext|>"]
+            "params": {
+                "search_model":"davinci",
+                "model":"curie",
+                "max_rerank":5,
+                "max_tokens":50,
+                "temperature":"None",
+                "logprobs":"None",
+                "stop":["\n", "<|endoftext|>"]
+            }
             
         },
         "database":{

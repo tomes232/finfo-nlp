@@ -17,7 +17,8 @@ def classification(query):
     query=query,
     labels=classification_config["labels"],
     )
-    return response.label
+    print(response.label.lower())
+    return response.label.lower()
 
 def classification_with_file(query, in_file):
     #upload file to openai

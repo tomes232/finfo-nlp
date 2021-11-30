@@ -2,7 +2,7 @@ import os
 from flask import Flask, request
 from werkzeug.utils import redirect
 import finfo
-from finfo.api.q_and_a import genAnswer
+from finfo.api.q_and_a import genAnswer, genAnswer_config
 import random
 import json
 from flask import Flask, render_template, request, url_for
@@ -62,7 +62,7 @@ def bot():
     classifier = classification(incoming_msg)
     print(classifier)
     try:
-        answer = genAnswer(incoming_msg, file)["answers"][0]
+        answer = genAnswer_config(incoming_msg, file, classification(incoming_msg))["answers"][0]
     except openai.error.InvalidRequestError:
         answer = "I don't have enough information to answer that question. Please try another."
     return str(answer)
