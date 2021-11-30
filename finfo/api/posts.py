@@ -12,11 +12,13 @@ from finfo.api.classification import classification
 import openai
 from datetime import datetime
 
-file = ""
+with open('finfo/api/config.json', 'r') as f:
+    config = json.load(f)
 
 @finfo.app.route("/", methods=["GET"])
 def home():
-    print("blah")
+    with open('finfo/api/config.json', 'r') as f:
+        config = json.load(f)
     with open("time.txt", "r") as f: 
         """
         need to use txt file for the last scraped because 
@@ -37,7 +39,8 @@ def home():
 
 @finfo.app.route("/api/v1/scrape/", methods=["POST"])
 def scrape():
-    
+    with open('finfo/api/config.json', 'r') as f:
+        config = json.load(f)
     with open("time.txt", "w") as f:
         time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         f.write(time)
@@ -52,17 +55,31 @@ def scrape():
     
     response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
     print(response)
-    file = response["id"]
+    #edit the config
+    config['file'] = response["id"]
+    #write it back to the file
+    with open('finfo/api/config.json', 'w') as f:
+        json.dump(config, f)
 
     return redirect(url_for('home', data=data))
 
 @finfo.app.route('/api/v1/bot/', methods=['POST'])
 def bot():
+    with open('finfo/api/config.json', 'r') as f:
+        config = json.load(f)
     incoming_msg = request.form["msg"]
-    classifier = classification(incoming_msg)
-    print(classifier)
+    print(incoming_msg)
+    if config['file'] == "":
+        response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
+        #edit the config
+        config['file'] = response["id"]
+        #write it back to the file
+        with open('finfo/api/config.json', 'w') as f:
+            json.dump(config, f)
     try:
-        answer = genAnswer_config(incoming_msg, file, classification(incoming_msg))["answers"][0]
+        answer = genAnswer(incoming_msg, config["file"])["answers"][0]
+        # answer = genAnswer(incoming_msg, config["file"])["answers"][0]
+        print(answer)
     except openai.error.InvalidRequestError:
         answer = "I don't have enough information to answer that question. Please try another."
     return str(answer)

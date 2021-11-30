@@ -1,7 +1,5 @@
 import os
 import openai
-import dotenv
-from dotenv import load_dotenv
 import json
 
 # load_dotenv()
@@ -48,7 +46,7 @@ def main():
   print("call me sugar daddy")
   while (True):
     query = input("Enter your question here: ")
-    answer = genAnswer(query, "file-QRZKYePIEhaQGkjS8ajlzPXJ")["answers"][0]
+    answer = genAnswer(query, "file-m0ha2QN8KdLFsP15VoOj7scz")["answers"][0]
     print("Easy")
     print(answer)
 

@@ -80,7 +80,7 @@ def scraper():
         article_classification = "funding"#classification(".".split(article)[0])
         #print(".".join(article.split(".")[:10]))
                 
-        data_dic = {"text": article, "metadata": str(date_.strftime('%Y-%m-%d'))}
+        data_dic = {"text": article[:950], "metadata": str(date_.strftime('%Y-%m-%d'))}
         data_upload = {"text": article, "metadata": str(date_.strftime('%Y-%m-%d'))}
 
         dict_in = upload_dict(data_upload, "articles", article_classification)
