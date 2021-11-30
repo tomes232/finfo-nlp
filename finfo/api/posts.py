@@ -12,7 +12,13 @@ from finfo.api.classification import classification
 import openai
 from datetime import datetime
 
-file = ""
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
+
+#write it back to the file
+with open('config.json', 'w') as f:
+    json.dump(config, f)
 
 @finfo.app.route("/", methods=["GET"])
 def home():
@@ -52,7 +58,8 @@ def scrape():
     
     response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
     print(response)
-    file = response["id"]
+    #edit the config
+    config['file'] = response["id"]
 
     return redirect(url_for('home', data=data))
 
@@ -61,8 +68,12 @@ def bot():
     incoming_msg = request.form["msg"]
     classifier = classification(incoming_msg)
     print(classifier)
+    if config['file'] == "":
+        response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
+        #edit the config
+        config['file'] = response["id"]
     try:
-        answer = genAnswer(incoming_msg, file)["answers"][0]
+        answer = genAnswer(incoming_msg, config["file"])["answers"][0]
     except openai.error.InvalidRequestError:
         answer = "I don't have enough information to answer that question. Please try another."
     return str(answer)
