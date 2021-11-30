@@ -44,10 +44,13 @@ def vc_parser(head,urls):
                     title = soup.find('h1',{'class':'epi-fontLg'})
                 else:
                     title = (soup.find('h1',{'class':'epi-fontLg bwalignc'}))
-                if not title.findChildren("b"):
-                    title = title.text
+                if title == None:
+                    title = (soup.find('meta',{'itemprop':'headline'}))['content']
                 else:
-                    title = (title.findChildren("b"))[0].text
+                    if not title.findChildren("b"):
+                        title = title.text
+                    else:
+                        title = (title.findChildren("b"))[0].text
                 #print(title)
                 mydiv = soup.find("div",{'class':'bw-release-story'})
                 #print(mydiv)
