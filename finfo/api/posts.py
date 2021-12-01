@@ -58,8 +58,8 @@ def scrape():
     response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
     print(response)
     #edit the config
-    if config["file"] != "":
-        openai.File.delete(file=config["file"])    
+    # if config["file"] != "":
+    #     openai.File.delete(file=config["file"])    
     config['file'] = response["id"]
     #write it back to the file
     with open('finfo/api/config.json', 'w') as f:
@@ -81,16 +81,16 @@ def bot():
         with open('finfo/api/config.json', 'w') as f:
             json.dump(config, f)
     try:
-        response = genAnswer(incoming_msg, config['file'])
+        # response = genAnswer(incoming_msg, config['file'])
+        # answer = response["answers"][0]
+        # print(response["selected_documents"][0]["score"])
+        # if response["selected_documents"][0]["score"] < 150:
+        print("time for search")
+        search_documents = search('articles', 'funding', incoming_msg)
+        print(search_documents)
+        response = genAnswer_text(incoming_msg, search_documents)
+        print(response)
         answer = response["answers"][0]
-        #print(response)
-        if response["selected_documents"][0]["score"] < 100:
-            print("time for search")
-            search_documents = search('articles', 'funding', incoming_msg)
-            print(search_documents)
-            response = genAnswer_text(incoming_msg, search_documents)
-            print(response)
-            answer = response["answers"][0]
 
         # answer = genAnswer(incoming_msg, config["file"])["answers"][0]
 
