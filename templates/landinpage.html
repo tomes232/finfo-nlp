@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:rgba(17, 17, 17, 1);">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css.css')}}" /> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body id="frame">
+    <style>
+        #frame {
+            font-family: Manrope;
+            font-style: normal;
+            /* identical to box height, or 136% */
+            font-feature-settings: 'liga' off;
+            color: #ffff;
+            height: 800px;/*Set to whatever*/
+        }
+        h1 {
+            position: absolute;
+            width: 447.74px;
+            height: 98px;
+            left: 336.07px;
+            top: 195px;
+            font-weight: 800;
+            font-size: 72px;
+            line-height: 98px;
+        }
+        h3 {
+            position: absolute;
+            width: 593px;
+            height: 64px;
+            left: 335px;
+            top: 321px;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 32px;
+            color: #5F6369;
+        }
+
+        button {
+            position: absolute;
+            width: 124px;
+            height: 32px;
+            left: 336px;
+            top: 417px;
+
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+        }
+
+        #circle1 {
+            position: absolute;
+            width: 1210px;
+            height: 169px;
+            left: 697px;
+            top: 880px;
+
+            background: #2ECE64;
+            filter: blur(400px);
+        }
+
+        #bubble {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 12px 20px;
+
+            position: static;
+            width: 240px;
+            height: 44px;
+            left: 100px;
+            top: 500px;
+
+            /* Gray 3 */
+
+            background: #828282;
+            /* Elevation 100 */
+
+            box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.24), 0px 2px 4px rgba(0, 0, 0, 0.16), 0px -1px 1px rgba(0, 0, 0, 0.08);
+            border-radius: 0px 24px 24px 24px;
+
+            /* Inside Auto Layout */
+
+            flex: none;
+            order: 0;
+            align-self: center;
+            flex-grow: 0;
+            margin: 100px 400px;
+        }
+        h2 {
+            position: absolute;
+            width: 534px;
+            height: 98px;
+            left: 426px;
+            top: 895px;
+
+            font-family: Manrope;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 48px;
+            line-height: 98px;
+            /* identical to box height, or 204% */
+
+            font-feature-settings: 'liga' off;
+
+            color: #FFFFFF;
+        }
+    </style>
+    <h1>Finfo.ai</h1>
+    <h3>Welcome to finfo, your assistant that answers questions about funding and investments</h3>
+    <button type="button">Chat now!</button>
+    <div id="circle1"></div>
+    <div id="bubble"></div>
+</body>
+
+<body>
+    <style>
+        body {
+            font-family: Manrope;
+            font-style: normal;
+            /* identical to box height, or 136% */
+            font-feature-settings: 'liga' off;
+            color: #ffff;
+            height: 800px;/*Set to whatever*/
+        }
+        #frame2 {
+            width: 1385px;
+            height: 800px;
+            left: 0px;
+            margin-top: 605px;
+            fill: aqua;
+            border: 1px solid #FFFFFF;
+            border-radius: 5px;
+        }
+    </style>
+    <div id="frame2">
+        <h2>/ Ask finfo to save time</h2>
+    </div>
+</body>
+</html>
