@@ -62,7 +62,7 @@ def upload_dict(dict_data, db_name, collection_name):
 
     if db_name == "articles":
         #pymongo find dict_data["text"]
-        if collection.find({"text": dict_data["text"]}).count() != 0:
+        if collection.count_documents({"text": dict_data["text"]})!= 0:
             print(collection.find({"text": dict_data["text"]}))
             return False
     collection.insert_one(dict_data)
@@ -107,17 +107,26 @@ def search(db_name, collection_name, query):
     db = client[db_name]
     # get a handle to the collection
     collection = db[collection_name]
+
     # search for the term
-
-    cursor = collection.aggregate([
-        {'$match': {'$text': {'$search': query}}},
-        {'$project': {'text': 15}}])
-
-    with open('search.jsonl', 'w') as jsonl_file:
-        for item in cursor:
-            #print(data_dic)
-            json.dump({"text": item["text"]}, jsonl_file)
-            jsonl_file.write('\n')
+    cursor = collection.aggregate([{   '$search': {'index': 'default', 'text': {'query': query, 'path': {'wildcard': '*'}}}}, {\
+    '$project': {\
+      'text': 1,\
+      'score': { '$meta': "searchScore" }\
+    }\
+  }])
+    i = 0
+    #with open('search.jsonl', 'w') as jsonl_file:
+    documents = []
+    for item in cursor:
+        documents.append(item["text"])
+        i += 1
+        #print(data_dic)
+        #json.dump({"text": item["text"]}, jsonl_file)
+        #jsonl_file.write('\n')
+        if i > 5:
+            break
+    return documents
 
 
 # Issue the serverStatus command and print the results
@@ -134,4 +143,4 @@ if __name__ == "__main__":
     # print(collection.find_one({'name': 'John'}))
     # print(collection.find_one({'name': 'John'}, {'_id': False}))
     # print(collection.find_one({'name': 'John'}, {'_id': False, 'name': True}))
-    search('articles', 'funding', 'who lead the series a funding for Circle')
+    search('articles', 'funding', 'how much funding did pepper receive for their series a fund')

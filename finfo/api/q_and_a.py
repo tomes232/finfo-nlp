@@ -6,6 +6,19 @@ import json
 openai.organization = "org-9eeR7LXRyCEwLMGEtfhmQLms"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+def genAnswer_text(query, search_documents):
+  response = openai.Answer.create(
+   search_model="davinci",
+   model="curie",
+   question=query,
+   documents= search_documents,
+   examples_context="OnChain Studios has raised $7.5 million in a seed funding round led by Andreessen Horowitz (a16z) to develop Cryptoys: a new non-fungible token (NFT) platform that combines digital toys and gaming.",
+   examples=[["Who led the funding rounnd for OnChain"," Andreessen Horowitz of a16z led the funding"]],
+   max_rerank=5,
+   max_tokens=50,
+   stop=["\n", "<|endoftext|>"]
+  )
+  return response
 
 def genAnswer(query, in_file):
   response = openai.Answer.create(
@@ -46,7 +59,7 @@ def main():
   print("call me sugar daddy")
   while (True):
     query = input("Enter your question here: ")
-    answer = genAnswer(query, "file-m0ha2QN8KdLFsP15VoOj7scz")["answers"][0]
+    answer = genAnswer(query, "file-BaVdbGFRrlyhCHTOZ2kJcKsL")["answers"][0]
     print("Easy")
     print(answer)
 

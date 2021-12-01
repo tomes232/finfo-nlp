@@ -2,7 +2,7 @@ import os
 from flask import Flask, request
 from werkzeug.utils import redirect
 import finfo
-from finfo.api.q_and_a import genAnswer, genAnswer_config
+from finfo.api.q_and_a import genAnswer, genAnswer_config, genAnswer_text
 import random
 import json
 from flask import Flask, render_template, request, url_for
@@ -11,6 +11,8 @@ from finfo.api.web_scraper import scraper
 from finfo.api.classification import classification
 import openai
 from datetime import datetime
+from finfo.mongodb import search
+import time 
 
 with open('finfo/api/config.json', 'r') as f:
     config = json.load(f)
@@ -56,6 +58,8 @@ def scrape():
     response  = openai.File.create(file=open("sandbox.jsonl"), purpose="answers")
     print(response)
     #edit the config
+    if config["file"] != "":
+        openai.File.delete(file=config["file"])    
     config['file'] = response["id"]
     #write it back to the file
     with open('finfo/api/config.json', 'w') as f:
@@ -77,9 +81,27 @@ def bot():
         with open('finfo/api/config.json', 'w') as f:
             json.dump(config, f)
     try:
-        answer = genAnswer(incoming_msg, config["file"])["answers"][0]
+        response = genAnswer(incoming_msg, config['file'])
+        answer = response["answers"][0]
+        #print(response)
+        if response["selected_documents"][0]["score"] < 100:
+            print("time for search")
+            search_documents = search('articles', 'funding', incoming_msg)
+            print(search_documents)
+            response = genAnswer_text(incoming_msg, search_documents)
+            print(response)
+            answer = response["answers"][0]
+
         # answer = genAnswer(incoming_msg, config["file"])["answers"][0]
-        print(answer)
+
     except openai.error.InvalidRequestError:
-        answer = "I don't have enough information to answer that question. Please try another."
+        try:
+            print("time for search")
+            search_documents = search('articles', 'funding', incoming_msg)
+            #response = genAnswer_text(incoming_msg, search_documents)
+            #print(response)
+            #answer = response["answers"][0]
+
+        except openai.error.InvalidRequestError:
+            answer = "I don't have enough information to answer that question. Please try another."
     return str(answer)
