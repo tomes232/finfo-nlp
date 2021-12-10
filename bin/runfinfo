@@ -1,0 +1,17 @@
+#!/bin/bash
+# insta485db
+
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+
+set -x 
+
+# ./bin/insta485db create
+export FLASK_ENV=development
+export FLASK_APP=finfo
+export CHROMEDRIVER=/bin/chromedriver
+
+
+
+flask run --host 0.0.0.0 --port 8000
